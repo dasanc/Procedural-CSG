@@ -1,4 +1,13 @@
-# openscad_projects
+<h2>Procedural-CSG</h2>
+<hr>
+<h4>A space for making art, functional pieces, and sharing useful snippets<h4>
+<h3>Languages:</h3>
+<p><ul>
+ <li>openSCAD</li>
+ <li>openJSCAD</li>
+ <li>ShapeJS</li>
+ </ul>
+ </p>
 
 <h3>Purpose:</h3>
 <p>
