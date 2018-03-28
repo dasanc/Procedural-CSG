@@ -1,27 +1,53 @@
 //User Inputs
-PODS = 12;			//Unit: num of pods; Affects: get_height, make_spiral
-RENDER = 40;		//Unit: resolution; Keep at 12 until you have a winning shape, then 25-50 for final render.
+/* [Global] */
+//Number of pods to hold.
+PODS = 12;		//[1:30]
+//This sets the resolution of your 3D model - keep it at "Low" until you are ready to make your STL.
+RENDER = 10;	//[10:Low, 40:STL]
 
-//Process Inputs
-$fn = RENDER;			//Unit: fragments; controls render settings
-LEG_ANGLE = 6; 	//Unit: degrees; angle between XY plane and leg
-LEG_LENGTH = 55;	//Unit: mm; represents dist along XY plane, not diagonal len of leg;
-LEG_DIAM = 12;		//Unit: mm
-LEG_COUNT = 5;		//Unit: num of legs
-FEET_TYPE = "frog";	//Options: round, flat, hole, frog; end caps for feet - use flat/hole if you want to attach pads
-MAST_DIAM = 12;		//Unit: mm; diam of center column
-FEET_HOLE_DIAM = 4;	//Unit: mm
-BLEND_RADIUS = 0.1;	//Unit: mm; corner breaking radius for Minkowski op
-SHELL = 1.6;			//Unit: mm; wall thickness
-PI = 3.14159;		//Constant for math
-POD_HEIGHT = 30;	//Unit: mm; Height of pod
-GROOVE	= 3;		//Unit:mm; depth of cut for thumb groove to make removal easier
+/* [Base] */
+//Number of legs
+LEG_COUNT = 5;		//[3:11]
+//Angle in degrees between XY plane and Leg
+LEG_ANGLE = 5; 		//[45]
+//Radius of circle that circumscribes legs
+LEG_LENGTH = 55;	//[10:200]
+//Radius of leg
+LEG_DIAM = 12;		//[1:30]
+
+/* [Feet] */
+//Changes the style of feet. Frog and Flat settings print best. Use hole to make a mounting hole at the end of the feet.
+FEET_TYPE = "frog";	//["round", "flat", "hole", "frog"]
+//Sets diameter of hole, if feet type is "hole"
+FEET_HOLE_DIAM = 4;	//[25]
+//Diameter of the vertical shaft connecting the spiral and base.
+
+/* [Spiral] */
+//Diameter of your coffee pod
+POD_DIAM = 32;		//[1:60]
+//Height of your coffee pod
+POD_HEIGHT = 30;	//[1:60]
+//The starting radius of the spiral.
+RADIUS_CONST = 64;	//[50:200]
+//Represents the amount of fill between each pod holder
+FILL_QUALITY = 1;	//[1:10]
+
+/* [Advanced] */
+MAST_DIAM = 12;	//[4:30]
+//Wall thickness of entire model
+SHELL = 1.6;	//[0.2:0.1:6]
+//Depth of cut for the vertical groove across pod holders.
+GROOVE	= 3;	//[0:30]
+
+
+/* [Hidden] */
+$fn = RENDER;		//Unit: fragments; controls render settings
 
 //***See make_pod_tree for Spiral Input Variables***//
 
 //Module Debugging
 make_base();
-make_pod_tree(20,2);
+make_pod_tree(RENDER,FILL_QUALITY + 1);
 
 module make_base(){
 	//MODULE VARIABLES
@@ -92,12 +118,11 @@ module make_legs(mast_rise=1, leg_hypotenuse=1, angle=90) {
 }  
 
 //SPIRAL ALGORITHM INPUTS 
-POD_DIAM = 32;			//Unit: mm; diameter of top of pod
+//Angle between axis of pod holder and vertical
+RING_ANGLE = 45;		//Angle the ring faces upward
 POD_CS = 8;				//Unit: mm; Outer diamer to inner diameter of hole
 MAX_ROTATION = PODS*32 > 360? PODS*(POD_DIAM + SHELL) : 360;	//Number of rotations to perform
-RADIUS_CONST = 64;	//Largest radius of spiral at the base
 HOLE_TYPE = "ring";		//Unit: ring, sheet, octagon
-RING_ANGLE = 45;		//Angle the ring faces upward
 START_HEIGHT = get_mast_len() + get_mast_rise();
 //echo(START_HEIGHT);
 
@@ -145,7 +170,7 @@ module make_pod_disc_gap(){
 module make_pod_cut(H = POD_HEIGHT){
 	//cylinder(d=POD_DIAM+POD_CS*2,h=SHELL,center=true);
 	R2 = POD_DIAM/2;
-	R1 = 26/2;
+	R1 = POD_DIAM/2 - 2;
 	translate([0,0,-H/2 + 4]) cylinder(r2=R2, r1=R1, h=H+4,center=true);
 	translate([-8,-(POD_DIAM + SHELL + 4)/2,-GROOVE + 1]) cube([16,POD_DIAM+SHELL*4,GROOVE + 1]);
 }
