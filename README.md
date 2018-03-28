@@ -1,5 +1,4 @@
 <h2>Procedural-CSG</h2>
-<hr>
 <h4>A space for making art, functional pieces, and sharing useful snippets<h4>
 <h3>Languages:</h3>
 <p><ul>
