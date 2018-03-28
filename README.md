@@ -1,10 +1,15 @@
 # openscad_projects
 
-Disclaimer:
-  This is my first repo and I really truly hope to make worthwhile OpenSCAD projects.
+<h3>Purpose:</h3>
+<p>
+The idea is to think of products that could hugely benefit from being 100% parametrized. Using ShapeJS or openJSCAD should allow for the creation of a website with an intelligent UI that feeds a parametric design. Using the aforementioned CSG (Constructive Solid Geometry) engines would let the user see a preview of their creation in 3D space before putting in an order.
 
-Purpose:
-  The idea is to think of simple consumer products that could hugely benefit from being 100% parametrized.
-  For example - hinges, drawer organizers, ...that's it so far.
-  
-  I'm also very interested in "Bloom" sculptures and procedurely generated art. I think this will be a good home for them as well.
+<i>For example - hinges, drawer organizers, coffee pod holder, lighter cases, etc...</i>
+<p>
+ 
+<h3>Art:</h3>
+<p>
+I'm very interested in "Bloom" sculptures and procedurely generated art. I think openSCAD and similar CSG softwares have a huge potential to creating beautiful algorithmic art. 
+<br/>
+<a href="http://www.johnedmark.com/">Click here</a> to see John Edmark's work to get an idea on what this kind of art looks like.
+</p>
