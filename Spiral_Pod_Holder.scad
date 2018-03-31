@@ -1,6 +1,6 @@
 //User Inputs
-PODS = 12;			//Unit: num of pods; Affects: get_height, make_spiral
-RENDER = 40;		//Unit: resolution; Keep at 12 until you have a winning shape, then 25-50 for final render.
+PODS = 18;			//Unit: num of pods; Affects: get_height, make_spiral
+RENDER = 18;		//Unit: resolution; Keep at 12 until you have a winning shape, then 25-50 for final render.
 
 //Process Inputs
 $fn = RENDER;			//Unit: fragments; controls render settings
@@ -21,7 +21,7 @@ GROOVE	= 3;		//Unit:mm; depth of cut for thumb groove to make removal easier
 
 //Module Debugging
 make_base();
-make_pod_tree(20,2);
+make_pod_tree(20,4);
 
 module make_base(){
 	//MODULE VARIABLES
@@ -95,7 +95,7 @@ module make_legs(mast_rise=1, leg_hypotenuse=1, angle=90) {
 POD_DIAM = 32;			//Unit: mm; diameter of top of pod
 POD_CS = 8;				//Unit: mm; Outer diamer to inner diameter of hole
 MAX_ROTATION = PODS*32 > 360? PODS*(POD_DIAM + SHELL) : 360;	//Number of rotations to perform
-RADIUS_CONST = 64;	//Largest radius of spiral at the base
+RADIUS_CONST = 60;	//Largest radius of spiral at the base
 HOLE_TYPE = "ring";		//Unit: ring, sheet, octagon
 RING_ANGLE = 45;		//Angle the ring faces upward
 START_HEIGHT = get_mast_len() + get_mast_rise();
